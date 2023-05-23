@@ -1,34 +1,31 @@
 import React, { useState } from 'react'
-import axios from 'axios';
+import { createUsuario } from '../Api/Crud';
 import './User.css';
-
-const sendDatasAPI = async (dados) => {
-    try {
-      const response = await axios.post('http://localhost:8080/usuarios', dados);
-      console.log('Dados enviados com sucesso:', response.data);
-      
-    } catch (error) {
-      console.error('Erro ao enviar os dados:', error);
-      
-    }
-  };
-  
 
 const FormUser = () => {
     const [nome_usuario, setName] = useState('');
     const [email_usuario, setEmail] = useState('');
     const [senha_usuario, setPassword] = useState('');
 
-    const handleSubmit = (event) =>{
+    const handleSubmit = async (event) =>{
         event.preventDefault();
 
         const userData = {
-            name: nome_usuario,
-            email: email_usuario,
-            password: senha_usuario
+            nome_usuario: nome_usuario,
+            email_usuario: email_usuario,
+            senha_usuario: senha_usuario
         };
-        sendDatasAPI(userData)
-    };
+        
+        try {
+            await createUsuario(userData);
+            console.log('Usuário inserido com sucesso!');
+            // Faça algo após criar o usuário, se necessário
+          } catch (error) {
+            console.error('Erro ao criar usuário:', error);
+            // Trate o erro de acordo com sua necessidade
+          }
+        };
+    
 
     return (
         <div>
@@ -69,6 +66,6 @@ const FormUser = () => {
             </div>
         </div>
     )
-}
+};
 
  export default FormUser;
