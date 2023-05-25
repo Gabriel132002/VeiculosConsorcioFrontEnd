@@ -16,17 +16,19 @@ export const getUsuarios = async () => {
   
   export const createUsuario = async (usuario) => {
     try {
+      if(usuario !== null){
       const response = await api.post('/usuarios/inserir', usuario);
       return response.data;
+      }
     } catch (error) {
       console.error('Erro ao criar usuário:', error);
       throw error;
     }
   };
   
-  export const deleteUsuario = async (id) => {
+  export const deleteUsuario = async (id_usuarios) => {
     try {
-      const response = await api.delete(`/usuarios/deletar/${id}`);
+      const response = await api.delete(`/usuarios/deletar/${id_usuarios}`);
       return response.data;
     } catch (error) {
       console.error('Erro ao excluir usuário:', error);

@@ -1,14 +1,28 @@
-import React from "react";
-import FormUser from "./component/User";
+import React, { useState } from 'react';
+import FormUser from './component/User';
+import Vehicles from './component/Vehicles';
 
-function App() {
+const App = () => {
+  const [currentComponent, setCurrentComponent] = useState('user');
+
+  const handleButtonClick = () => {
+    setCurrentComponent('vehicles');
+  };
+
+  const handleBackButtonClick = () =>{
+    setCurrentComponent('user')
+  }
+
   return (
     <div>
-      <div>
-        <FormUser/>
-      </div>    
+      {currentComponent === 'user' ? (
+        <FormUser handleButtonClick={handleButtonClick}/>
+      ) : (
+        <Vehicles handleBackButtonClick={handleBackButtonClick}/>
+      )}
+      
     </div>
   );
-}
+};
 
 export default App;
