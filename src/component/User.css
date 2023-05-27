@@ -43,9 +43,14 @@ input:hover{
     justify-content: center;
 }
 
+.form-group{
+    margin-top: 10px;
+}
+
 header{
     display:flex;
     justify-content: center;
+    margin-top: 10px;
 }
 
 .submit-button{
@@ -53,3 +58,11 @@ header{
     margin-right: 10px;
 }
 
+main{
+  max-width: 580px;
+  width: 100%;
+  margin: 32px auto;
+
+  display: grid;
+  gap: 24px;
+}

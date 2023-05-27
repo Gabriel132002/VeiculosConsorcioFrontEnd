@@ -9,7 +9,7 @@ const App = () => {
     setCurrentComponent('vehicles');
   };
 
-  const handleBackButtonClick = () =>{
+  const handleBackButtonClick = () => {
     setCurrentComponent('user')
   }
 

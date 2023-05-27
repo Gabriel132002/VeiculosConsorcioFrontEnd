@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import { createUsuario } from '../Api/Crud';
+import Notification from './Notification';
 import './User.css';
+import './Notification.css'
 
 const FormUser = ({ handleButtonClick }) => {
+    const [showNotification, setShowNotification] = useState(false)
     const [nome_usuario, setName] = useState('');
     const [email_usuario, setEmail] = useState('');
     const [senha_usuario, setPassword] = useState('');
@@ -19,33 +22,29 @@ const FormUser = ({ handleButtonClick }) => {
         
         try {
             await createUsuario(userData);
-            console.log('Usuário inserido com sucesso!');           
+            setShowNotification(true)         
           } catch (error) {
-            console.error('Erro ao criar usuário:', error);
+            console.error('Erro ao cadastrar usuario', error)
+            setShowNotification('Erro ao criar usuário:', error);
           }
         };
-    
-    // const handleDeleteById = async () =>{
-    //     try{
-    //         await deleteUsuario(usuarioId)
-    //         console.log("Usuario deletado com sucesso")
 
-    //     }catch(error){
-    //         console.error("Erro ao deletar usuario", error)
-    //     }
-    // }
+        const handleCloseNotificatio = () =>{
+            setShowNotification(false)
+        }
     
 
     return (
         <div>
+            <main>
             <header>
                 <h1 className='title-page'>Cadastro de usuário</h1>
             </header>
             <div className='form-container'>
                 <form>
                     <div className='form-group'>
-                        <label className='name-label' htmlFor="name">Nome:</label>
                         <input
+                        placeholder='Nome'
                         type="text"
                         id="nameInput"
                         value={nome_usuario}
@@ -54,8 +53,8 @@ const FormUser = ({ handleButtonClick }) => {
                     </div>
 
                     <div className='form-group'>
-                        <label className='email-label' htmlFor="email">Email:</label>
                         <input
+                        placeholder='Email'
                         type="text"
                         id="email"
                         value={email_usuario}
@@ -64,8 +63,8 @@ const FormUser = ({ handleButtonClick }) => {
                     </div>
 
                     <div className='form-group'>
-                        <label className='password-label' htmlFor="senha">Senha:</label>
                         <input
+                        placeholder='Senha'
                         type="password"
                         id="passwordInput"
                         value={senha_usuario}
@@ -73,21 +72,13 @@ const FormUser = ({ handleButtonClick }) => {
                         />
                     </div>
 
-                    {/* <div className='form-group'>
-                        <label className='delete-label'>Deletar:</label>
-                        <input 
-                        type="text"
-                        id='delete'
-                        value={usuarioId}
-                        onChange={(event) => setUsuarioId(event.target.value)}/>
-
-                    </div> */}
                     <button className='submit-button' type="submit" onClick={handleSubmit}>Enviar</button>
-                    {/* <button type='button' onClick={handleDeleteById}>Deletar</button> */}
                     <button className='nextButton' type="button" onClick={handleButtonClick}>Continuar</button>
 
                 </form>
             </div>
+            {showNotification && (<Notification message="Usuario cadastrado com sucesso" onClose={handleCloseNotificatio}/>)}
+            </main>
         </div>
     )
 };
