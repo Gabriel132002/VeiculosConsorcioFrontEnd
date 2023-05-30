@@ -9,7 +9,6 @@ const FormUser = ({ handleButtonClick }) => {
     const [nome_usuario, setName] = useState('');
     const [email_usuario, setEmail] = useState('');
     const [senha_usuario, setPassword] = useState('');
-    // const [usuarioId, setUsuarioId] = useState('')
 
     const handleSubmit = async (event) =>{
         event.preventDefault();
@@ -24,8 +23,7 @@ const FormUser = ({ handleButtonClick }) => {
             await createUsuario(userData);
             setShowNotification(true)         
           } catch (error) {
-            console.error('Erro ao cadastrar usuario', error)
-            setShowNotification('Erro ao criar usuário:', error);
+            setShowNotification('Erro ao cadastrar usuário:', error);
           }
         };
 
@@ -38,7 +36,7 @@ const FormUser = ({ handleButtonClick }) => {
         <div>
             <main>
             <header>
-                <h1 className='title-page'>Cadastro de usuário</h1>
+                <h1 className='title-user'>Cadastro de usuário</h1>
             </header>
             <div className='form-container'>
                 <form>
