@@ -13,8 +13,12 @@ const App = () => {
   };
 
   const handleBackButtonClick = () => {
-    setCurrentComponent('user');
+    setCurrentComponent('vehicles');
   };
+
+  const handleBackButtonClickUser = () =>{
+    setCurrentComponent('user')
+  }
 
   const handleAddToCart = (vehicle) => {
     setCart([...cart, vehicle]);
@@ -36,7 +40,7 @@ const App = () => {
       ) : currentComponent === 'vehicles' ? (
         <React.Fragment>
           <Vehicles
-            handleBackButtonClick={handleBackButtonClick}
+            handleBackButtonClickUser={handleBackButtonClickUser}
             handleAddToCart={handleAddToCart}
           />
           <img

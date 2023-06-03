@@ -10,7 +10,7 @@ import cartIcon from '../assets/carrinho.png'
 
 import './Vehicles.css';
 
-const Vehicles = ({ handleBackButtonClick, handleAddToCart }) => {
+const Vehicles = ({ handleBackButtonClickUser, handleAddToCart }) => {
   const [showNotification, setShowNotification] = useState(false);
   const [showCart, setShowCart] = useState(false);
 
@@ -63,7 +63,7 @@ const Vehicles = ({ handleBackButtonClick, handleAddToCart }) => {
         ))}
       </main>
 
-      <button className="button-back" onClick={handleBackButtonClick}>
+      <button className="button-back" onClick={handleBackButtonClickUser}>
         Voltar
       </button>
 
