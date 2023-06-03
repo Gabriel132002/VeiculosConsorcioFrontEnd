@@ -33,7 +33,7 @@ const FormUser = ({ handleButtonClick }) => {
     
 
     return (
-        <div>
+        <div className='user-container'>
             <main>
             <header>
                 <h1 className='title-user'>Cadastro de usuário</h1>

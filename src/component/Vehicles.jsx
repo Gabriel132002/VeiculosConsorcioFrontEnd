@@ -1,61 +1,23 @@
-// import React from 'react'
-// import './Vehicles.css'
-
-
-// const Vehicles = ({ handleBackButtonClick, addToCart }) => {
-//   const vehicleList = [
-//     {id: 1, name: 'Civic', price: 200000},
-//     {id: 2, name: 'City', price: 150000},
-//     {id: 3, name: 'Hrv', price: 130000}
-//   ]
-//   return (
-//     <body>
-//       <div className='container'>
-//         <header>
-//           <h1 className='title-vehicles'>Bem vindo à loja online da honda</h1>
-//         </header>
-        
-//         <main>
-//           <section>
-//             <div>
-//               <h2>Carros</h2>
-//               <p>Escolha um modelo que te agrade</p>
-
-//               <ul>
-//                 <li>
-                  
-//                 </li>
-//                 <li>
-                  
-//                 </li>
-//                 <li>
-                  
-//                 </li>
-//               </ul>
-
-//             </div>
-//           </section>
-//         </main>
-//           <button type='button' className='button-back-container' onClick={handleBackButtonClick}>Voltar</button>
-//       </div>
-//     </body>
-//   )
-// }
-
-// export default Vehicles
-
 import React, { useState } from 'react';
 import Notification from './Notification';
+
+import Cart from './Cart';
+
+import civicImage from '../assets/civicBranco.jpg';
+import hrvImage from '../assets/hrvBranco.jpg';
+import cityImage from '../assets/cityCinza.jpg';
+import cartIcon from '../assets/carrinho.png'
+
 import './Vehicles.css';
-import './Notification';
 
 const Vehicles = ({ handleBackButtonClick, handleAddToCart }) => {
   const [showNotification, setShowNotification] = useState(false);
+  const [showCart, setShowCart] = useState(false);
 
   const vehicleList = [
-    { id: 1, name: 'Civic', price: 200000 },
-    { id: 2, name: 'Hrv', price: 130000 },
-    { id: 3, name: 'City', price: 150000 },
+    { id: 1, name: 'Civic', price: 20000, image: civicImage },
+    { id: 2, name: 'Hrv', price: 13000, image: hrvImage },
+    { id: 3, name: 'City', price: 150000, image: cityImage },
   ];
 
   const handleAddToCartClick = (vehicle) => {
@@ -66,33 +28,48 @@ const Vehicles = ({ handleBackButtonClick, handleAddToCart }) => {
     }, 3000);
   };
 
-  const handleCloseNotificatio = () => {
-    setShowNotification(false)
+  const handleCloseNotification = () => {
+    setShowNotification(false);
+  };
+
+  const handleCartClick = () => {
+    setShowCart(true)
   }
 
   return (
-    <div>
-      <h2>Veículos disponíveis</h2>
-      <main>
-        <section>
-          <div>
-            <ul>
-              {vehicleList.map((vehicle) => (
-                <li key={vehicle.id}>
-                  {vehicle.name} - R${vehicle.price}
-                  <button className="btn-add-cart" onClick={() => handleAddToCartClick(vehicle)}>
-                    Adicionar ao Carrinho
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
+    <div>   
+      <h2>Página de escolha de veículos
+      {showCart && <Cart />}
+      <img
+          className="cart-icon"
+          src={cartIcon}
+          alt="Carrinho"
+          onClick={handleCartClick}
+        />
+      </h2>
+      <main>    
+        {vehicleList.map((vehicle) => (
+          <section key={vehicle.id}>
+            <div className="card">
+              <h4>Escolha a cor que deseja</h4>
+              <img className='card-image' src={vehicle.image} alt={vehicle.name} />
+              <h3>{vehicle.name}</h3>
+              <p>R${vehicle.price}</p>
+              <button className="btn-add-cart" onClick={() => handleAddToCartClick(vehicle)}>
+                Adicionar ao Carrinho
+              </button>
+            </div>
+          </section>
+        ))}
       </main>
 
-      <button onClick={handleBackButtonClick}>Voltar</button>
+      <button className="button-back" onClick={handleBackButtonClick}>
+        Voltar
+      </button>
 
-      {showNotification && <Notification message="Carro adicionado ao carrinho" onClose={handleCloseNotificatio}/>}
+      {showNotification && (
+        <Notification message="Carro adicionado ao carrinho" onClose={handleCloseNotification} />
+      )}
     </div>
   );
 };

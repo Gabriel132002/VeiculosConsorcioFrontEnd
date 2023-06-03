@@ -9,6 +9,15 @@ input[type=text] {
     background-color: lightblue;
   }
 
+ .user-container{
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100vh;
+ }
+
   input[type=password] {
     width: 100%;
     padding: 12px 20px;

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import FormUser from './component/User';
 import Vehicles from './component/Vehicles';
-import Cart from './component/Cart'
+import Cart from './component/Cart';
+import cartIcon from './assets/carrinho.png';
 
 const App = () => {
   const [currentComponent, setCurrentComponent] = useState('user');
@@ -12,27 +13,39 @@ const App = () => {
   };
 
   const handleBackButtonClick = () => {
-    setCurrentComponent('user')
+    setCurrentComponent('user');
   };
 
   const handleAddToCart = (vehicle) => {
-    setCart([...cart, vehicle])
+    setCart([...cart, vehicle]);
   };
 
-  const handleRemoveFromCart = (item) =>{
-    const updateCartItems = cart.filter((cartItem) => cartItem !== item);
-    setCart(updateCartItems)
-  }
+  const handleRemoveFromCart = (item) => {
+    const updatedCartItems = cart.filter((cartItem) => cartItem !== item);
+    setCart(updatedCartItems);
+  };
+
+  const handleCartClick = () => {
+    setCurrentComponent('cart');
+  };
 
   return (
     <div>
       {currentComponent === 'user' ? (
         <FormUser handleButtonClick={handleButtonClick} />
       ) : currentComponent === 'vehicles' ? (
-        <Vehicles
-          handleBackButtonClick={handleBackButtonClick}
-          handleAddToCart={handleAddToCart}
-        />
+        <React.Fragment>
+          <Vehicles
+            handleBackButtonClick={handleBackButtonClick}
+            handleAddToCart={handleAddToCart}
+          />
+          <img
+            className="cart-icon"
+            src={cartIcon}
+            alt="Carrinho"
+            onClick={handleCartClick}
+          />
+        </React.Fragment>
       ) : (
         <Cart
           cartItems={cart}
@@ -40,8 +53,6 @@ const App = () => {
           handleRemoveFromCart={handleRemoveFromCart}
         />
       )}
-
-      {/* <Vehicles/> */}
     </div>
   );
 };

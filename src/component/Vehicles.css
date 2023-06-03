@@ -4,24 +4,49 @@
     box-sizing: border-box;
 }
 
-h2{
-  font-weight: normal;
+body{
+  background: linear-gradient(to bottom, #4b4949, #000000);
 }
 
+h2{
+  position: relative;
+  font-weight: normal;
+  display: flex;
+  justify-content: center;
+  font-family: 'Playfair', serif;
+  font-size: 50px;
+  margin-bottom: 70px;
+}
 
+h2::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-size: cover;
+    cursor: pointer;
+    width: 100px; 
+    height: 100px; 
+}
 
-.button-back-container {
-    position: relative;
+.cart-icon{
+  content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-size: cover;
+    cursor: pointer;
+    width: 100px; 
+    height: 100px;
+}
+
+.button-back {
+    display: flex;
     justify-content: center;
-    bottom: 0;
-    left: 50%;
   }
 
   section {
     color: white;
-
-    border: 1px solid;
-
     border: 1px solid;
     background-image: linear-gradient(90deg, #3446e6 0%, #43E7AD 50.52%, #E2D45C 100%);
     padding-top: 4px;
@@ -29,12 +54,15 @@ h2{
 }
 
   section div{
-    position: relative;
-    justify-content: center;
     background-color: #2A2634;
     padding: 32px;
     padding-top: 24px;
     border-radius: 8px;
+  }
+
+  section div img{
+    display: flex;
+    margin: auto;
   }
 
   section div ul li {
@@ -51,5 +79,33 @@ h2{
   
 .btn-add-cart{
   margin-left: 10px;
+  display: flex;
 }
 
+h3{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h4{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+p{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.btn-add-cart{
+  margin:auto;
+}
+
+.button-back{
+  margin: auto;
+}
