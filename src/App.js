@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
+import UserLogin from './component/UserLogin';
 import FormUser from './component/User';
 import Vehicles from './component/Vehicles';
 import Cart from './component/Cart';
 import cartIcon from './assets/carrinho.png';
 
 const App = () => {
-  const [currentComponent, setCurrentComponent] = useState('user');
+  const [currentComponent, setCurrentComponent] = useState('login');
   const [cart, setCart] = useState([]);
+
+  const handleLoginSuccess = () => {
+    setCurrentComponent('vehicles');
+  };
 
   const handleButtonClick = () => {
     setCurrentComponent('vehicles');
@@ -16,9 +21,13 @@ const App = () => {
     setCurrentComponent('vehicles');
   };
 
-  const handleBackButtonClickUser = () =>{
-    setCurrentComponent('user')
-  }
+  const handleBackButtonClickUser = () => {
+    setCurrentComponent('login');
+  };
+
+  const handleRegisterClick = () => {
+    setCurrentComponent('register');
+  };
 
   const handleAddToCart = (vehicle) => {
     setCart([...cart, vehicle]);
@@ -35,9 +44,14 @@ const App = () => {
 
   return (
     <div>
-      {currentComponent === 'user' ? (
+      {currentComponent === 'login' ? (
+        <UserLogin
+          handleLoginSuccess={handleLoginSuccess}
+          handleRegisterClick={handleRegisterClick}
+        />
+      ) : currentComponent === 'register' ? (
         <FormUser handleButtonClick={handleButtonClick} />
-      ) : currentComponent === 'vehicles' ? (
+      ) : (
         <React.Fragment>
           <Vehicles
             handleBackButtonClickUser={handleBackButtonClickUser}
@@ -50,12 +64,6 @@ const App = () => {
             onClick={handleCartClick}
           />
         </React.Fragment>
-      ) : (
-        <Cart
-          cartItems={cart}
-          handleBackButtonClick={handleBackButtonClick}
-          handleRemoveFromCart={handleRemoveFromCart}
-        />
       )}
     </div>
   );

@@ -62,11 +62,6 @@ const Vehicles = ({ handleBackButtonClickUser, handleAddToCart }) => {
           </section>
         ))}
       </main>
-
-      <button className="button-back" onClick={handleBackButtonClickUser}>
-        Voltar
-      </button>
-
       {showNotification && (
         <Notification message="Carro adicionado ao carrinho" onClose={handleCloseNotification} />
       )}

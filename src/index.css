@@ -46,7 +46,7 @@ button{
 
 body * {
   /* fonte: http://www.sitepoint.com/eight-definitive-font-stacks-2/ */
-  font-family: "Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif;
+  font-family: 'Playfair', serif;
 }
 
 body {

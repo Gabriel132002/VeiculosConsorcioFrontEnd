@@ -41,7 +41,7 @@ const FormUser = ({ handleButtonClick }) => {
             <div className='form-container'>
                 <form>
                     <div className='form-group'>
-                        <input
+                        <input className='input-text'
                         placeholder='Nome'
                         type="text"
                         id="nameInput"
@@ -51,7 +51,7 @@ const FormUser = ({ handleButtonClick }) => {
                     </div>
 
                     <div className='form-group'>
-                        <input
+                        <input className='input-text'
                         placeholder='Email'
                         type="text"
                         id="email"
@@ -61,7 +61,7 @@ const FormUser = ({ handleButtonClick }) => {
                     </div>
 
                     <div className='form-group'>
-                        <input
+                        <input className='input-password'
                         placeholder='Senha'
                         type="password"
                         id="passwordInput"
