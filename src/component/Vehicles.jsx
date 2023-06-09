@@ -15,8 +15,8 @@ const Vehicles = ({ handleBackButtonClickUser, handleAddToCart }) => {
   const [showCart, setShowCart] = useState(false);
 
   const vehicleList = [
-    { id: 1, name: 'Civic', price: 20000, image: civicImage },
-    { id: 2, name: 'Hrv', price: 13000, image: hrvImage },
+    { id: 1, name: 'Civic', price: 200000, image: civicImage },
+    { id: 2, name: 'Hrv', price: 130000, image: hrvImage },
     { id: 3, name: 'City', price: 150000, image: cityImage },
   ];
 
@@ -38,7 +38,7 @@ const Vehicles = ({ handleBackButtonClickUser, handleAddToCart }) => {
 
   return (
     <div>   
-      <h2>Página de escolha de veículos
+      <h2>Página de escolha de veículos</h2>
       {showCart && <Cart />}
       <img
           className="cart-icon"
@@ -46,12 +46,10 @@ const Vehicles = ({ handleBackButtonClickUser, handleAddToCart }) => {
           alt="Carrinho"
           onClick={handleCartClick}
         />
-      </h2>
       <main>    
         {vehicleList.map((vehicle) => (
           <section key={vehicle.id}>
             <div className="card">
-              <h4>Escolha a cor que deseja</h4>
               <img className='card-image' src={vehicle.image} alt={vehicle.name} />
               <h3>{vehicle.name}</h3>
               <p>R${vehicle.price}</p>

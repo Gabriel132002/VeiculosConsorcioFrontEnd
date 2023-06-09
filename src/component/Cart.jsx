@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import ConfirmationBox from './ConfirmationBox';
 import Notification from './Notification';
 
@@ -6,15 +7,20 @@ import './Cart.css';
 
 const Cart = ({ cartItems, handleBackButtonClick, handleRemoveFromCart, setCart }) => {
   const [showConfirmation, setShowConfirmation] = useState(false);
-  const [showNotification, setShowNotification] = useState(false)
+  const [showNotification, setShowNotification] = useState(false);
+  const [showReportButton, setShowReportButton] = useState(false);
 
-  const handleRemoveFromCartClick = (item) =>{
-    handleRemoveFromCart(item)
-    setShowNotification(true)
+  const handleRemoveFromCartClick = (item) => {
+    handleRemoveFromCart(item);
+    setShowNotification(true);
     setTimeout(() => {
-      setShowNotification(false)
-    }, 3000)
-  }
+      setShowNotification(false);
+    }, 3000);
+  };
+
+  const handleCloseNotification = () => {
+    setShowNotification(false);
+  };
 
   const handleFinishPurchase = () => {
     setShowConfirmation(true);
@@ -23,22 +29,38 @@ const Cart = ({ cartItems, handleBackButtonClick, handleRemoveFromCart, setCart 
   const handleConfirmPurchase = () => {
     setCart([]);
     setShowConfirmation(false);
+    setShowReportButton(true); 
   };
 
+  const handleShowReportButtonClick = async () => {
+    try {
+      const response = await axios.get('http://localhost:8080/usuarios/relatorio', {
+        responseType: 'blob',
+      });
+  
+      const blob = new Blob([response.data], { type: 'application/pdf' });
+      const url = URL.createObjectURL(blob);
+      window.open(url); 
+    } catch (error) {
+      console.error('Erro ao buscar o relatório:', error);
+    }
+  };
+  
+
   return (
-    <div className='cart-container'>
+    <div className="cart-container">
       <h2>Carrinho de Compras</h2>
       {cartItems.length > 0 ? (
         <div>
           {cartItems.map((item) => (
             <div key={item.id} className="cart-item">
-              <img className='img-carro' src={item.image} alt={item.name} />
+              <img className="img-carro" src={item.image} alt={item.name} />
               <h3>{item.name}</h3>
               <p>R${item.price}</p>
               <button onClick={() => handleRemoveFromCartClick(item)}>Remover</button>
             </div>
           ))}
-          <div className='btn-finalizar-container'>
+          <div className="btn-finalizar-container">
             <button onClick={handleFinishPurchase}>Finalizar Compra</button>
           </div>
         </div>
@@ -53,12 +75,17 @@ const Cart = ({ cartItems, handleBackButtonClick, handleRemoveFromCart, setCart 
         />
       )}
 
-      <div className='btn-voltar-container'>
+      <div className="btn-voltar-container">
         <button onClick={handleBackButtonClick}>Voltar</button>
+        {showReportButton && (
+        <div className="report-button-container">
+          <button onClick={handleShowReportButtonClick}>Mostrar Relatório</button>
+        </div>
+      )}
       </div>
 
       {showNotification && (
-        <Notification message='Veículo removido do carrinho com sucesso'/>
+        <Notification message="Veículo removido do carrinho com sucesso" onClose={handleCloseNotification} />
       )}
     </div>
   );

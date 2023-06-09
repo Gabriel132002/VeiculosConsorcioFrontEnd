@@ -13,8 +13,20 @@ const App = () => {
     setCurrentComponent('vehicles');
   };
 
-  const handleButtonClick = () => {
-    setCurrentComponent('vehicles');
+  const handleRegisterClick = () => {
+    setCurrentComponent('register');
+  };
+
+  const handleAddToCart = (vehicle) => {
+    setCart((prevCart) => [...prevCart, vehicle]);
+  };
+
+  const handleRemoveFromCart = (item) => {
+    setCart((prevCart) => prevCart.filter((cartItem) => cartItem !== item));
+  };
+
+  const handleCartClick = () => {
+    setCurrentComponent('cart');
   };
 
   const handleBackButtonClick = () => {
@@ -25,33 +37,22 @@ const App = () => {
     setCurrentComponent('login');
   };
 
-  const handleRegisterClick = () => {
-    setCurrentComponent('register');
-  };
-
-  const handleAddToCart = (vehicle) => {
-    setCart([...cart, vehicle]);
-  };
-
-  const handleRemoveFromCart = (item) => {
-    const updatedCartItems = cart.filter((cartItem) => cartItem !== item);
-    setCart(updatedCartItems);
-  };
-
-  const handleCartClick = () => {
-    setCurrentComponent('cart');
+  const handleButtonClick = () => {
+    setCurrentComponent('vehicles');
   };
 
   return (
     <div>
-      {currentComponent === 'login' ? (
+      {currentComponent === 'login' && (
         <UserLogin
           handleLoginSuccess={handleLoginSuccess}
           handleRegisterClick={handleRegisterClick}
         />
-      ) : currentComponent === 'register' ? (
+      )}
+      {currentComponent === 'register' && (
         <FormUser handleButtonClick={handleButtonClick} />
-      ) : (
+      )}
+      {currentComponent === 'vehicles' && (
         <React.Fragment>
           <Vehicles
             handleBackButtonClickUser={handleBackButtonClickUser}
@@ -64,6 +65,14 @@ const App = () => {
             onClick={handleCartClick}
           />
         </React.Fragment>
+      )}
+      {currentComponent === 'cart' && (
+        <Cart
+          cartItems={cart}
+          handleRemoveFromCart={handleRemoveFromCart}
+          handleBackButtonClick={handleBackButtonClick}
+          setCart={setCart}
+        />
       )}
     </div>
   );

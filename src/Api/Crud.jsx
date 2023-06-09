@@ -35,4 +35,14 @@ export const getUsuarios = async () => {
       throw error;
     }
   };
+
+  export const login = async (nome_usuario, senha_usuario) => {
+    try {
+      const response = await api.post('/usuarios/login', { nome_usuario, senha_usuario });
+      return response.data;
+    } catch (error) {
+      console.error('Erro ao fazer login:', error);
+      throw error;
+    }
+  };
   

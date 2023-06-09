@@ -55,6 +55,10 @@
     margin-top: 100px;
   }
 
+  .report-button-container{
+    margin-left: 20px;
+  }
+
   .btn-finalizar-container{
     display: flex;
     justify-content: center;

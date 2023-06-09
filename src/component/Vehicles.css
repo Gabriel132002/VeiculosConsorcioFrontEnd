@@ -4,7 +4,11 @@
     box-sizing: border-box;
 }
 
-body{
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; 
   background: linear-gradient(to bottom, #4b4949, #000000);
 }
 
@@ -17,16 +21,15 @@ h2{
   margin-bottom: 70px;
 }
 
-h2::after{
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    background-size: cover;
-    cursor: pointer;
-    width: 100px; 
-    height: 100px; 
+h2 {
+  font-weight: normal;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+  margin-bottom: 7px;
 }
+
 
 .cart-icon{
   content: "";

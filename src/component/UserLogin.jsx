@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { login } from '../Api/Crud';
 import './UserLogin.css';
 
 const UserLogin = ({ handleLoginSuccess, handleRegisterClick }) => {
@@ -10,22 +10,14 @@ const UserLogin = ({ handleLoginSuccess, handleRegisterClick }) => {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    // Validar campos de entrada
     if (!nome_usuario || !senha_usuario) {
       setError('Por favor, preencha todos os campos');
       return;
     }
 
     try {
-      // Fazer a chamada à API para autenticação
-      const response = await axios.post('http://localhost:8080//usuarios/login', {
-        nome_usuario,
-        senha_usuario,
-      });
-
-      // Verificar a resposta da API
-      if (response.status === 200) {
-        // Autenticação bem-sucedida
+      const response = await login(nome_usuario, senha_usuario);
+      if (response) {
         handleLoginSuccess();
       } else {
         setError('Usuário ou senha inválidos');
@@ -39,7 +31,6 @@ const UserLogin = ({ handleLoginSuccess, handleRegisterClick }) => {
     <div className="page-container">
       <h2>Login de Usuário</h2>
       <form onSubmit={handleLogin}>
-        {/* Campos de entrada de usuário e senha */}
         <input
           className="name-input"
           type="text"
