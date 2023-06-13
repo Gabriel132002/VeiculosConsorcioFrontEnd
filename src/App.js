@@ -41,6 +41,10 @@ const App = () => {
     setCurrentComponent('vehicles');
   };
 
+  const handleProfitClick = () => {
+    // Implemente a lógica de cálculo do lucro aqui
+  };
+
   return (
     <div>
       {currentComponent === 'login' && (
@@ -72,6 +76,8 @@ const App = () => {
           handleRemoveFromCart={handleRemoveFromCart}
           handleBackButtonClick={handleBackButtonClick}
           setCart={setCart}
+          handleProfitClick={handleProfitClick} 
+          reportGenerated={false} 
         />
       )}
     </div>

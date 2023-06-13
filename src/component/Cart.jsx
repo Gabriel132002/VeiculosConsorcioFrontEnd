@@ -9,6 +9,7 @@ const Cart = ({ cartItems, handleBackButtonClick, handleRemoveFromCart, setCart 
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
   const [showReportButton, setShowReportButton] = useState(false);
+  const [showProfit, setShowProfit] = useState(false);
 
   const handleRemoveFromCartClick = (item) => {
     handleRemoveFromCart(item);
@@ -29,7 +30,7 @@ const Cart = ({ cartItems, handleBackButtonClick, handleRemoveFromCart, setCart 
   const handleConfirmPurchase = () => {
     setCart([]);
     setShowConfirmation(false);
-    setShowReportButton(true); 
+    setShowReportButton(true);
   };
 
   const handleShowReportButtonClick = async () => {
@@ -37,15 +38,18 @@ const Cart = ({ cartItems, handleBackButtonClick, handleRemoveFromCart, setCart 
       const response = await axios.get('http://localhost:8080/usuarios/relatorio', {
         responseType: 'blob',
       });
-  
+
       const blob = new Blob([response.data], { type: 'application/pdf' });
       const url = URL.createObjectURL(blob);
-      window.open(url); 
+      window.open(url);
     } catch (error) {
       console.error('Erro ao buscar o relatório:', error);
     }
   };
-  
+
+  const handleProfitClick = () => {
+    setShowProfit(!showProfit);
+  };
 
   return (
     <div className="cart-container">
@@ -78,10 +82,15 @@ const Cart = ({ cartItems, handleBackButtonClick, handleRemoveFromCart, setCart 
       <div className="btn-voltar-container">
         <button onClick={handleBackButtonClick}>Voltar</button>
         {showReportButton && (
-        <div className="report-button-container">
-          <button onClick={handleShowReportButtonClick}>Mostrar Relatório</button>
-        </div>
-      )}
+          <div className="report-button-container">
+            <button onClick={handleShowReportButtonClick}>Mostrar Relatório</button>
+          </div>
+        )}
+        {showReportButton && showProfit && (
+          <div className="report-button-container">
+            <button onClick={handleProfitClick}>Ver Lucro</button>
+          </div>
+        )}
       </div>
 
       {showNotification && (
